@@ -1,6 +1,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "types.h"
+#include "aes.h"
 #include "firmlaunch.h"
 
 int N3DSFirmDecrypt(u32* FIRM, u8 N3DSKey1, u8 N3DSKey2){//Address of FIRM (Must manually set up keyslot0x11)
