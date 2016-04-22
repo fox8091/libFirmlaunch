@@ -5,7 +5,7 @@
 #include "aes.h"
 #include "firmlaunch.h"
 
-int firm_setup(u32* FIRM, u8 N3DSKey1[0x10], u8 N3DSKey2[0x10]){
+int firm_setup(u32* FIRM, void* N3DSKey1[0x10], void* N3DSKey2[0x10]){
 	if(strcmp((char *)FIRM, "FIRM", 4) != 0) return 3;   //Not FIRM
 	
 	u8* arm9bin = (void*)(FIRM + FIRM[0xA0/4]);
