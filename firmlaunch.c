@@ -31,3 +31,11 @@ int firm_setup(u32* FIRM, void* N3DSKey1[0x10], void* N3DSKey2[0x10]){
 	
 	return 0;
 }
+
+void firmlaunch(u32* FIRM){
+	if(firm_setup(FIRM) == 0){
+		patch(FIRM);
+		//TODO: Screen deinit
+		((void (*)())0x0801B01C)(); //TODO: Don't hardcode this value
+	}
+}
