@@ -32,10 +32,17 @@ int firm_setup(u32* FIRM, void* N3DSKey1[0x10], void* N3DSKey2[0x10]){
 	return 0;
 }
 
-void firmlaunch(u32* FIRM){
-	if(firm_setup(FIRM) == 0){
-		patch(FIRM);
-		//TODO: Screen deinit
-		((void (*)())0x0801B01C)(); //TODO: Don't hardcode this value
-	}
+void firmlaunch(){
+	//TODO: Screen deinit
+	((void (*)())0x0801B01C)(); //TODO: Don't hardcode this value
 }
+
+void *pattern_match(u8* baseaddr, u32 search_size, u8* pattern, u32 size){
+	for(u32 i = 0; i < (search_size - size); i++){
+		if(memcmp(baseaddr+i, pattern, size) == 0){
+			return baseaddr+i;
+		}
+	}
+	return NULL;
+}
+
