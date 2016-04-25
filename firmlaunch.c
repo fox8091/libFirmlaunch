@@ -46,11 +46,11 @@ void *pattern_match(u8* baseaddr, u32 search_size, u8* pattern, u32 size){
 	return NULL;
 }
 
-int patch(u32* FIRM, u32* search_size, u8* pattern, u8* patch_data, u32 size){
-    void *ptr = pattern_match(FIRM, search_size, pattern, size);
+int patch(u32* FIRM, u32* search_size, u8* pattern, u8* patch_data, u32 pattern_size, u32 patch_size){
+    void *ptr = pattern_match(FIRM, search_size, pattern, pattern_size);
     if(ptr == NULL){
         return -1;
     }
-    memcpy(ptr, patch_data, size);
+    memcpy(ptr, patch_data, patch_size);
     return 0;
 }
