@@ -8,12 +8,12 @@
 #define ARM11Entry 0x1FFFFFF8
 #define ARM9Entry 0x0801B01C
 
-int firm_setup(u32* FIRM, void* N3DSKey1[0x10], void* N3DSKey2[0x10]){
-	if(strcmp((char *)FIRM, "FIRM", 4) != 0) return 3;   //Not FIRM
+int firm_setup(u32* FIRM, void* N3DSKey1, void* N3DSKey2){
+	if(strncmp((char *)FIRM, "FIRM", 4) != 0) return 3;   //Not FIRM
 	
 	u8* arm9bin = (void*)(FIRM + FIRM[0xA0/4]);
 	
-	if(arm9bin[0]) != 0xA7 || arm9bin[1] != 0x38) return 0; //O3DS FIRM
+	if(arm9bin[0] != 0xA7 || arm9bin[1] != 0x38) return 0; //O3DS FIRM
 	
 	if(arm9bin[0x800] != 0x70 || arm9bin[0x801] != 0x47){ //If encrypted
 		if(arm9bin[0x50] != 0xFF && arm9bin[0x61] != 0xA9) set_normalKey(0x11, N3DSKey2);
@@ -29,7 +29,7 @@ int firm_setup(u32* FIRM, void* N3DSKey1[0x10], void* N3DSKey2[0x10]){
 		set_keyY(keyslot, arm9bin + 0x10);
 		
 		set_keyslot(keyslot);
-		aes(arm9bin + 0x800, arm9bin + 0x800, arm9bin + 0x20, atoi((const char *)(arm9bin + 0x30)/16, AES_CTR_DECRYPT);
+		aes(arm9bin + 0x800, arm9bin + 0x800, arm9bin + 0x20, atoi((const char *)(arm9bin + 0x30))/16, AES_CTR_DECRYPT);
 	}
 	
 	return 0;
@@ -40,7 +40,7 @@ void firmlaunch(u32* FIRM){
 	memcpy((void*)FIRM[0x74/4], (void*)FIRM + FIRM[0x70/4], FIRM[0x78/4]);
 	memcpy((void*)FIRM[0xA4/4], (void*)FIRM + FIRM[0xA0/4], FIRM[0xA8/4]);
 	//TODO: Screen deinit
-	*((vu32 *) ARM11Entry) = FIRM[0x8/4]
+	*((vu32 *) ARM11Entry) = FIRM[0x8/4];
 	((void (*)())ARM9Entry)();
 }
 
