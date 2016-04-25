@@ -32,8 +32,12 @@ int firm_setup(u32* FIRM, void* N3DSKey1[0x10], void* N3DSKey2[0x10]){
 	return 0;
 }
 
-void firmlaunch(){
+void firmlaunch(u32* FIRM){
+	memcpy((void*)FIRM[0x44/4], (void*)FIRM + FIRM[0x40/4], FIRM[0x48/4]);
+	memcpy((void*)FIRM[0x74/4], (void*)FIRM + FIRM[0x70/4], FIRM[0x78/4]);
+	memcpy((void*)FIRM[0xA4/4], (void*)FIRM + FIRM[0xA0/4], FIRM[0xA8/4]);
 	//TODO: Screen deinit
+	*((vu32 *) 0x1FFFFFF8) = FIRM[0x8/4]
 	((void (*)())0x0801B01C)(); //TODO: Don't hardcode this value
 }
 
