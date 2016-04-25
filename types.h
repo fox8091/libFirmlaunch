@@ -2,6 +2,7 @@
 #define TYPES_H
 
 #include <stdbool.h>
+#include <stddef.h>
 
 #define u8 unsigned char
 #define vu8 volatile unsigned char
@@ -27,5 +28,4 @@
 #define s64 signed long long int
 #define vs64 volatile signed long long int
 
-#define NULL (void*)0
 #endif
