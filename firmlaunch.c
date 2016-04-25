@@ -5,6 +5,9 @@
 #include "aes.h"
 #include "firmlaunch.h"
 
+#define ARM11Entry 0x1FFFFFF8
+#define ARM9Entry 0x0801B01C
+
 int firm_setup(u32* FIRM, void* N3DSKey1[0x10], void* N3DSKey2[0x10]){
 	if(strcmp((char *)FIRM, "FIRM", 4) != 0) return 3;   //Not FIRM
 	
@@ -37,8 +40,8 @@ void firmlaunch(u32* FIRM){
 	memcpy((void*)FIRM[0x74/4], (void*)FIRM + FIRM[0x70/4], FIRM[0x78/4]);
 	memcpy((void*)FIRM[0xA4/4], (void*)FIRM + FIRM[0xA0/4], FIRM[0xA8/4]);
 	//TODO: Screen deinit
-	*((vu32 *) 0x1FFFFFF8) = FIRM[0x8/4]
-	((void (*)())0x0801B01C)(); //TODO: Don't hardcode this value
+	*((vu32 *) ARM11Entry) = FIRM[0x8/4]
+	((void (*)())ARM9Entry)();
 }
 
 void *pattern_match(u8* baseaddr, u32 search_size, u8* pattern, u32 size){
