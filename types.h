@@ -1,5 +1,4 @@
-#ifndef TYPES_H
-#define TYPES_H
+#pragma once
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -27,5 +26,3 @@
 
 #define s64 signed long long int
 #define vs64 volatile signed long long int
-
-#endif

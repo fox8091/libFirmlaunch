@@ -1,5 +1,4 @@
-#ifndef AES_H
-#define AES_H
+#pragma once
 
 #include "types.h"
 
@@ -30,5 +29,3 @@ void set_normalKey(u8 keyslot, void* key);
 void set_keyX(u8 keyslot, void* keyX);
 void set_keyY(u8 keyslot, void* keyY);
 void aes(void* in, void* out, void* iv, u32 blocks, u32 method);
-
-#endif
