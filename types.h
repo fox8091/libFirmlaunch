@@ -2,27 +2,28 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 
-#define u8 unsigned char
-#define vu8 volatile unsigned char
+#define u8 uint8_t
+#define vu8 volatile uint8_t
 
-#define s8 signed char
-#define vs8 volatile signed char
+#define s8 int8_t
+#define vs8 volatile int8_t
 
-#define u16 unsigned short
-#define vu16 volatile unsigned short
+#define u16 uint16_t
+#define vu16 volatile uint16_t
 
-#define s16 signed short
-#define vs16 volatile signed short
+#define s16 int16_t
+#define vs16 volatile int16_t
 
-#define u32 unsigned int
-#define vu32 volatile unsigned int
+#define u32 uint32_t
+#define vu32 volatile uint32_t
 
-#define s32 signed int
-#define vs32 volatile signed int
+#define s32 int32_t
+#define vs32 volatile int32_t
 
-#define u64 unsigned long long int
-#define vu64 volatile unsigned long long int
+#define u64 uint64_t
+#define vu64 volatile uint64_t
 
-#define s64 signed long long int
-#define vs64 volatile signed long long int
+#define s64 int64_t
+#define vs64 volatile int64_t
