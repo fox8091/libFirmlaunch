@@ -56,17 +56,26 @@ void firmlaunch(u32* FIRM){
 	((void (*)())ARM9Entry)();
 }
 
-void *pattern_match(u8* baseaddr, u32 search_size, u8* pattern, u32 size){
-	for(u32 i = 0; i < (search_size - size); i++){
-		if(memcmp(baseaddr+i, pattern, size) == 0){
-			return baseaddr+i;
+void *pattern_match(u8* baseaddr, u32 search_size, u8* pattern, u32 size, bool reversed){
+	if(reversed){
+		for(u32 i = 0; i < (search_size - size); i++){
+			if(memcmp(baseaddr+i, pattern, size) == 0){
+				return baseaddr+i;
+			}
 		}
+		return NULL;
+	} else {
+		for(u32 i = 0; i < (search_size - size); i++){
+			if(memcmp(baseaddr-i, pattern, size) == 0){
+				return baseaddr-i;
+			}
+		}
+		return NULL;
 	}
-	return NULL;
 }
 
-int patch(u32* FIRM, u32 search_size, u8* pattern, u8* patch_data, u32 pattern_size, u32 patch_size, u32 offset){
-    void *ptr = pattern_match((unsigned char *)FIRM, (unsigned)search_size, pattern, pattern_size);
+int patch(u32* FIRM, u32 search_size, u8* pattern, u8* patch_data, u32 pattern_size, u32 patch_size, u32 offset, bool reversed){
+    void *ptr = pattern_match((unsigned char *)FIRM, (unsigned)search_size, pattern, pattern_size, reversed);
     if(ptr == NULL){
         return -1;
     }
