@@ -7,19 +7,19 @@ void set_keyslot(u8 keyslot){
 	AES_CNT |= 0x04000000;
 }
 
-void set_normalKey(u8 keyslot, void* key){
+void set_normalKey(u8 keyslot, u8* key){
 	if (keyslot > 0x3F) return;
 	AES_KEYCNT = keyslot;
 	for (int i = 0; i < 0x10; i+=4) AES_KEYFIFO = *(u32*)(key+i);
 }
 
-void set_keyX(u8 keyslot, void* keyX){
+void set_keyX(u8 keyslot, u8* keyX){
 	if (keyslot > 0x3F) return;
 	AES_KEYCNT = keyslot;
 	for (int i = 0; i < 0x10; i+=4) AES_KEYXFIFO = *(u32*)(keyX+i);
 }
 
-void set_keyY(u8 keyslot, void* keyY){
+void set_keyY(u8 keyslot, u8* keyY){
 	if (keyslot > 0x3F) return;
 	AES_KEYCNT = keyslot;
 	for (int i = 0; i < 0x10; i+=4) AES_KEYYFIFO = *(u32*)(keyY+i);
@@ -48,9 +48,9 @@ void aes(void* in, void* out, void* iv, u32 blocks, u32 method){
 
 		AES_CNT |= 0x80000000;
 
-		for (int j = 0; j < 0x10; j+=4) AES_WRFIFO = *((u32*)(in+i+j));
+		for (int j = 0; j < 0x10; j+=4) AES_WRFIFO = *((u32*)((u8*)in+i+j));
 		while(((AES_CNT >> 0x5) & 0x1F) < 0x4); //wait for every word to get processed
-		for (int j = 0; j < 0x10; j+=4) *((u32*)(out+i+j)) = AES_RDFIFO;
+		for (int j = 0; j < 0x10; j+=4) *((u32*)((u8*)out+i+j)) = AES_RDFIFO;
 
 		AES_CNT &= ~0x80000000;
 

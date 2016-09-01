@@ -25,7 +25,7 @@
 
 
 void set_keyslot(u8 keyslot);
-void set_normalKey(u8 keyslot, void* key);
-void set_keyX(u8 keyslot, void* keyX);
-void set_keyY(u8 keyslot, void* keyY);
+void set_normalKey(u8 keyslot, u8* key);
+void set_keyX(u8 keyslot, u8* keyX);
+void set_keyY(u8 keyslot, u8* keyY);
 void aes(void* in, void* out, void* iv, u32 blocks, u32 method);
