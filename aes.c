@@ -10,27 +10,27 @@ void set_keyslot(u8 keyslot){
 void set_normalKey(u8 keyslot, u8* key){
 	if (keyslot > 0x3F) return;
 	AES_KEYCNT = keyslot;
-	for (int i = 0; i < 0x10; i+=4) AES_KEYFIFO = *(u32*)(key+i);
+	for (u32 i = 0; i < 0x10; i+=4) AES_KEYFIFO = *(u32*)(key+i);
 }
 
 void set_keyX(u8 keyslot, u8* keyX){
 	if (keyslot > 0x3F) return;
 	AES_KEYCNT = keyslot;
-	for (int i = 0; i < 0x10; i+=4) AES_KEYXFIFO = *(u32*)(keyX+i);
+	for (u32 i = 0; i < 0x10; i+=4) AES_KEYXFIFO = *(u32*)(keyX+i);
 }
 
 void set_keyY(u8 keyslot, u8* keyY){
 	if (keyslot > 0x3F) return;
 	AES_KEYCNT = keyslot;
-	for (int i = 0; i < 0x10; i+=4) AES_KEYYFIFO = *(u32*)(keyY+i);
+	for (u32 i = 0; i < 0x10; i+=4) AES_KEYYFIFO = *(u32*)(keyY+i);
 }
 
 void set_ctr(u32* ctr){
-	for (int i = 0; i < 4; i++) AES_CTR[i] = ctr[3-i];
+	for (u32 i = 0; i < 4; i++) AES_CTR[i] = ctr[3-i];
 }
 
 void add_ctr(u8* ctr){
-	for (int i = 15; i >= 0; i--){
+	for (u32 i = 15; i >= 0; i--){
 		if (ctr[i] == 0xFF) ctr[i] = 0;
 		else {
 			ctr[i] += 1;
@@ -42,7 +42,7 @@ void add_ctr(u8* ctr){
 void aes(void* in, void* out, void* iv, u32 blocks, u32 method){
 	AES_CNT = method | 0x03C00C00;
 
-	for (int i = 0; i < blocks*0x10; i+=0x10){
+	for (u32 i = 0; i < blocks*0x10; i+=0x10){
 		AES_BLKCNT = (1 << 16);
 		if (iv != NULL) set_ctr((u32*)iv);
 
