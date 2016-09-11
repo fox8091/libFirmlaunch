@@ -26,11 +26,11 @@ void set_keyY(u8 keyslot, u8* keyY){
 }
 
 void set_ctr(u32* ctr){
-	for (u32 i = 0; i < 4; i++) AES_CTR[i] = ctr[3-i];
+	for (int i = 0; i < 4; i++) AES_CTR[i] = ctr[3-i];
 }
 
 void add_ctr(u8* ctr){
-	for (u32 i = 15; i >= 0; i--){
+	for (int i = 15; i >= 0; i--){
 		if (ctr[i] == 0xFF) ctr[i] = 0;
 		else {
 			ctr[i] += 1;
