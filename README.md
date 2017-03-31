@@ -1,4 +1,4 @@
-#### THIS IS NOW DEPRECIATED ####
+#### THIS IS NOW DEPRECATED ####
 
 ## libFirmlaunch
 A simple library to patch a firmware and perform firmlaunch
