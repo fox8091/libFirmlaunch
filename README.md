@@ -1,8 +1,12 @@
+#### THIS IS NOW DEPRECIATED ####
+
 ## libFirmlaunch
 A simple library to patch a firmware and perform firmlaunch
 
-#Credits
+Credits
+
 TiniVi for aes and some firm code
 
-#License
+License
+
 All code within this repository is licensed under the included license file unless otherwise state
